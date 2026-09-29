@@ -1,0 +1,11 @@
+[theme]
+primaryColor = "#EDEDED"
+backgroundColor = "#000000"
+secondaryBackgroundColor = "#0A0A0A"
+textColor = "#EDEDED"
+font = "sans serif"
+
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = true
