@@ -562,6 +562,12 @@ ML Engineer | Algorithmic Vision | 2018 – 2021
     }
 }
 
+# Pre-populate demo data if not already present
+if "job_description_input" not in st.session_state:
+    st.session_state["job_description_input"] = PRESETS["Senior Full-Stack AI Engineer"]["job"]
+if "master_resume_input" not in st.session_state:
+    st.session_state["master_resume_input"] = PRESETS["Senior Full-Stack AI Engineer"]["resume"]
+
 SAMPLE_ANALYSIS_PREVIEW = {
     "match_percentage": 92,
     "match_verdict": "Strong Match",
@@ -816,66 +822,47 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 
-# --- Main Application Header Bar ---
-st.markdown("""
-<div class="vercel-top-nav">
-    <div class="vercel-brand-group">
-        <svg class="vercel-triangle" viewBox="0 0 76 65">
+# --- Main Application Header & Quick Actions ---
+st.markdown(f"""
+<div class="vercel-top-nav" style="margin-bottom: 1.25rem;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <svg class="vercel-triangle" viewBox="0 0 76 65" style="width: 22px; height: 18px;">
             <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
         </svg>
-        <span class="nav-slash">/</span>
-        <span class="nav-team">antigravity</span>
-        <span class="nav-slash">/</span>
-        <span class="nav-project">resume-intelligence</span>
-    </div>
-    <div class="vercel-nav-actions">
+        <span style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;">AI Resume Tailor</span>
         <span class="vercel-status-pill">
             <span class="pulse-dot"></span>
-            Production
+            {active_model}
         </span>
-        <span style="font-family: var(--font-mono); font-size: 11px; color: #71717A; border: 1px solid #222; padding: 2px 8px; border-radius: 4px;">
-            Groq LPU
-        </span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="https://github.com/Kadin-Demarche/ai-resume-tailor" target="_blank" style="text-decoration: none; color: #888888; font-size: 12px; font-family: var(--font-mono); border: 1px solid #222; padding: 3px 10px; border-radius: 5px;">GitHub ↗</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# --- Hero Section ---
-st.markdown(f"""
-<div class="vercel-hero">
-    <div class="announcement-badge">
-        <span class="announcement-dot"></span>
-        <span>Engine Active &nbsp;•&nbsp; {active_model}</span>
-        <span>→</span>
-    </div>
-    <div class="hero-title">High-Velocity Resume Intelligence.</div>
-    <div class="hero-subtitle">
-        Architect tailored, ATS-dominant resumes aligned with target positions in milliseconds.
-        Powered by Groq's high-throughput LPU inference stack and deep reasoning models.
-    </div>
-    <div class="hero-telemetry-bar">
-        <div class="telemetry-item">
-            <span class="telemetry-val">&lt; 1.2s</span>
-            <span class="telemetry-label">Inference Target</span>
-        </div>
-        <div class="telemetry-sep"></div>
-        <div class="telemetry-item">
-            <span class="telemetry-val">100%</span>
-            <span class="telemetry-label">Local Secrets</span>
-        </div>
-        <div class="telemetry-sep"></div>
-        <div class="telemetry-item">
-            <span class="telemetry-val">120B</span>
-            <span class="telemetry-label">Reasoning Params</span>
-        </div>
-        <div class="telemetry-sep"></div>
-        <div class="telemetry-item">
-            <span class="telemetry-val">ATS+</span>
-            <span class="telemetry-label">Keyword Density</span>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+# Functional Toolbar directly above text inputs
+tbar_c1, tbar_c2, tbar_c3, tbar_c4 = st.columns([2.2, 1.2, 1.2, 0.8])
+with tbar_c1:
+    st.markdown("<div style='font-size: 13px; color: #888; padding-top: 6px;'>Target Job &amp; Master Resume Inputs</div>", unsafe_allow_html=True)
+with tbar_c2:
+    if st.button("⚡ Demo: AI Engineer", use_container_width=True, help="Load pre-engineered Senior AI Engineer demo"):
+        st.session_state["job_description_input"] = PRESETS["Senior Full-Stack AI Engineer"]["job"]
+        st.session_state["master_resume_input"] = PRESETS["Senior Full-Stack AI Engineer"]["resume"]
+        st.rerun()
+with tbar_c3:
+    if st.button("⚡ Demo: Staff ML", use_container_width=True, help="Load pre-engineered Staff ML Engineer demo"):
+        st.session_state["job_description_input"] = PRESETS["Staff Machine Learning Engineer"]["job"]
+        st.session_state["master_resume_input"] = PRESETS["Staff Machine Learning Engineer"]["resume"]
+        st.rerun()
+with tbar_c4:
+    if st.button("🧹 Clear", use_container_width=True, help="Wipe workspace textareas"):
+        st.session_state["job_description_input"] = ""
+        st.session_state["master_resume_input"] = ""
+        if "analysis_result" in st.session_state:
+            del st.session_state["analysis_result"]
+        st.rerun()
+
 
 
 # --- Input Workspace Panels ---

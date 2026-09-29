@@ -63,40 +63,38 @@
 <body class="min-h-screen flex flex-col antialiased selection:bg-neutral-800 selection:text-white">
 
   <!-- Top Navigation Bar -->
-  <header class="border-b border-[#1A1A1A] bg-black/60 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+  <header class="border-b border-[#1A1A1A] bg-black/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <svg class="w-5 h-4 fill-white" viewBox="0 0 76 65">
           <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
         </svg>
-        <span class="text-neutral-600 font-light">/</span>
-        <span class="text-white font-semibold tracking-tight text-sm">resume-intelligence</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+        <span class="text-white font-bold tracking-tight text-sm">AI Resume Tailor</span>
+        <div class="hidden sm:flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
           <span class="pulse-dot"></span>
           <span id="model-nav-badge">openai/gpt-oss-120b</span>
         </div>
-        <a href="https://github.com/Kadin-Demarche/ai-resume-tailor" target="_blank" class="px-3 py-1 rounded-md text-xs font-medium text-neutral-400 hover:text-white border border-[#222] hover:border-neutral-700 transition">GitHub</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs text-neutral-500 font-mono hidden md:inline">Groq LPU Inference</span>
+        <a href="https://github.com/Kadin-Demarche/ai-resume-tailor" target="_blank" class="px-3 py-1 rounded-md text-xs font-medium text-neutral-300 hover:text-white border border-[#262626] hover:border-neutral-600 transition">GitHub ↗</a>
       </div>
     </div>
   </header>
 
   <!-- Main Content Container -->
-  <main class="max-w-6xl mx-auto px-6 py-10 flex-1 w-full">
+  <main class="max-w-6xl mx-auto px-6 py-6 flex-1 w-full">
     
-    <!-- Hero Section -->
-    <div class="mb-10 text-center max-w-3xl mx-auto">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-400 mb-4">
-        <span class="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_#38BDF8]"></span>
-        <span>Groq LPU Engine &bull; High-Throughput Inference</span>
+    <!-- Subheader Info -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-[#1A1A1A] pb-4">
+      <div>
+        <h1 class="text-lg font-bold text-white tracking-tight">Executive Resume Tailoring Workspace</h1>
+        <p class="text-neutral-400 text-xs mt-0.5">Evaluate qualification fit, diagnose keyword gaps, and generate ATS-optimized resumes.</p>
       </div>
-      <h1 class="hero-heading text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-        Targeted Resume Engineering.
-      </h1>
-      <p class="text-neutral-400 text-base sm:text-lg leading-relaxed">
-        Analyze qualification fit against any job description, diagnose skill gaps, and generate an ATS-optimized tailored resume powered by Groq & openai/gpt-oss-120b.
-      </p>
+      <div class="flex items-center gap-2 text-xs font-mono text-neutral-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Demo Data Preloaded</span>
+      </div>
     </div>
 
     <!-- Configuration Bar -->
@@ -107,8 +105,8 @@
         <button onclick="saveApiKey()" class="px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-xs text-white font-medium rounded-md border border-neutral-700 transition">Save Key</button>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="loadScenario('senior')" class="px-3 py-1.5 bg-[#141414] hover:bg-[#1E1E1E] text-xs text-neutral-300 font-medium rounded-md border border-[#262626] hover:border-neutral-600 transition">⚡ Scenario: Senior AI Eng</button>
-        <button onclick="loadScenario('ml')" class="px-3 py-1.5 bg-[#141414] hover:bg-[#1E1E1E] text-xs text-neutral-300 font-medium rounded-md border border-[#262626] hover:border-neutral-600 transition">⚡ Scenario: Staff ML</button>
+        <button onclick="loadScenario('senior')" class="px-3 py-1.5 bg-[#141414] hover:bg-[#1E1E1E] text-xs text-neutral-300 font-medium rounded-md border border-[#262626] hover:border-neutral-600 transition">⚡ Demo: AI Engineer</button>
+        <button onclick="loadScenario('ml')" class="px-3 py-1.5 bg-[#141414] hover:bg-[#1E1E1E] text-xs text-neutral-300 font-medium rounded-md border border-[#262626] hover:border-neutral-600 transition">⚡ Demo: Staff ML</button>
         <button onclick="clearWorkspace()" class="px-3 py-1.5 bg-[#141414] hover:bg-[#1E1E1E] text-xs text-neutral-400 hover:text-white font-medium rounded-md border border-[#262626] transition">🧹 Clear</button>
       </div>
     </div>
@@ -283,8 +281,8 @@
       const jVal = document.getElementById('jobDescInput').value;
       const rVal = document.getElementById('masterResumeInput').value;
       
-      const jWords = jVal.trim() ? jVal.trim().split(/\\s+/).length : 0;
-      const rWords = rVal.trim() ? rVal.trim().split(/\\s+/).length : 0;
+      const jWords = jVal.trim() ? jVal.trim().split(/\s+/).length : 0;
+      const rWords = rVal.trim() ? rVal.trim().split(/\s+/).length : 0;
 
       document.getElementById('jobStats').textContent = `${jVal.length.toLocaleString()} chars • ${jWords.toLocaleString()} words`;
       document.getElementById('resumeStats').textContent = `${rVal.length.toLocaleString()} chars • ${rWords.toLocaleString()} words`;
@@ -293,8 +291,8 @@
     function loadScenario(type) {
       const item = SCENARIOS[type];
       if (item) {
-        document.getElementById('jobDescInput').value = item.job.replace(/\\n/g, '\\n');
-        document.getElementById('masterResumeInput').value = item.resume.replace(/\\n/g, '\\n');
+        document.getElementById('jobDescInput').value = item.job;
+        document.getElementById('masterResumeInput').value = item.resume;
         updateStats();
       }
     }
