@@ -261,21 +261,6 @@
 
     let currentTailoredMarkdown = "";
 
-    function loadApiKey() {
-      const saved = localStorage.getItem('GROQ_API_KEY');
-      if (saved) {
-        document.getElementById('apiKeyInput').value = saved;
-      }
-    }
-
-    function saveApiKey() {
-      const val = document.getElementById('apiKeyInput').value.trim();
-      if (val) {
-        localStorage.setItem('GROQ_API_KEY', val);
-        alert('Groq API Key saved in local session!');
-      }
-    }
-
     function updateStats() {
       const jVal = document.getElementById('jobDescInput').value;
       const rVal = document.getElementById('masterResumeInput').value;
@@ -318,7 +303,7 @@
     }
 
     async function runPipeline() {
-      const apiKey = document.getElementById('apiKeyInput').value.trim() || localStorage.getItem('GROQ_API_KEY');
+      const apiKey = localStorage.getItem('GROQ_API_KEY') || '';
       const jobDesc = document.getElementById('jobDescInput').value.trim();
       const masterResume = document.getElementById('masterResumeInput').value.trim();
 
@@ -454,7 +439,6 @@
 
     // Initialize on load
     window.addEventListener('DOMContentLoaded', () => {
-      loadApiKey();
       loadScenario('senior');
     });
   </script>
