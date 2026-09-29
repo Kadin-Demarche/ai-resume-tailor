@@ -97,12 +97,11 @@
       </div>
     </div>
 
-    <!-- Configuration Bar -->
-    <div class="bg-[#0A0A0A] border border-[#1F1F1F] rounded-xl p-4 mb-8 flex flex-wrap items-center justify-between gap-4">
-      <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[280px]">
-        <label class="text-xs uppercase tracking-wider font-semibold text-neutral-500">Groq API Key:</label>
-        <input type="password" id="apiKeyInput" placeholder="gsk_... (Stored locally in session)" class="bg-[#050505] border border-[#262626] rounded-md px-3 py-1.5 text-xs text-white flex-1 min-w-[200px] font-mono focus:border-neutral-500 transition">
-        <button onclick="saveApiKey()" class="px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-xs text-white font-medium rounded-md border border-neutral-700 transition">Save Key</button>
+    <!-- Actions Toolbar -->
+    <div class="bg-[#0A0A0A] border border-[#1F1F1F] rounded-xl p-3 mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2 text-xs text-neutral-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]"></span>
+        <span class="font-medium text-neutral-300">Target Job &amp; Candidate Resume Inputs</span>
       </div>
       <div class="flex items-center gap-2">
         <button onclick="loadScenario('senior')" class="px-3 py-1.5 bg-[#141414] hover:bg-[#1E1E1E] text-xs text-neutral-300 font-medium rounded-md border border-[#262626] hover:border-neutral-600 transition">⚡ Demo: AI Engineer</button>
